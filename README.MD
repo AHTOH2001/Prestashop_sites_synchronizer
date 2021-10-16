@@ -6,4 +6,4 @@ cache format:
     - {reference: [img_url_1, img_url_2, ...]}
     
 - cached_descs.json:
-    - {reference: {'desc': {lang_id_1: value, lang_id_2: value, ...}, 'desc_s': {lang_id_1: value,  ...}}, ...}
+    - {reference: {'desc': {lang_iso_1: value, lang_iso_2: value, ...}, 'desc_s': {lang_iso_1: value,  ...}}, ...}

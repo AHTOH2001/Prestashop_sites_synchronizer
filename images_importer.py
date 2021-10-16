@@ -1,3 +1,4 @@
+import os
 from prestapyt import PrestaShopWebServiceError, PrestaShopWebService
 import json
 import time
@@ -9,6 +10,11 @@ def get_images():
     total_images = 0
     total_products = 0
     total_start = time.time()
+
+    if not os.path.isfile(cached_images_path):
+        with open(cached_images_path, 'w') as fp:
+            fp.write('{}')
+
     with open(cached_images_path, 'r') as fp:
         cached_images = json.load(fp)
 
@@ -69,6 +75,11 @@ def add_images():
     total_images = 0
     total_products = 0
     total_start = time.time()
+
+    if not os.path.isfile(cached_images_path):
+        with open(cached_images_path, 'w') as fp:
+            fp.write('{}')
+
     with open(cached_images_path, 'r') as fp:
         cached_images = json.load(fp)
 
