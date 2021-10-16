@@ -61,9 +61,8 @@ def get_images():
     with open(cached_images_path, 'w') as fp:
         json.dump(cached_images, fp)
 
-    logger.info(
-        'Total get {} new images for {} products in {}s...\n'.format(total_images, total_products,
-                                                                     time.time() - total_start))
+    logger.info('Total get {} new images for {} products in {}s...\n'.format(
+        total_images, total_products, time.time() - total_start))
 
 
 def add_images():
@@ -84,9 +83,8 @@ def add_images():
         id_to_ref = dict()
         # active only products
         try:
-            products = prestashop.get('products',
-                                      options={'limit': product_limit, 'display': '[reference,id]',
-                                               'filter[active]': '[1]'})[0]
+            products = prestashop.get(
+                'products', options={'limit': product_limit, 'display': '[reference,id]', 'filter[active]': '[1]'})[0]
         except PrestaShopWebServiceError as e:
             logger.warning(e.msg)
             continue
@@ -120,8 +118,8 @@ def add_images():
 
         total_images += new_images
         total_products += new_products
-        logger.info(
-            'Add {} new images for {} products in {}s...\n'.format(new_images, new_products, time.time() - start))
+        logger.info('Add {} new images for {} products in {}s...\n'.format(
+            new_images, new_products, time.time() - start))
 
     with open(cached_images_path, 'w') as fp:
         json.dump(cached_images, fp)
