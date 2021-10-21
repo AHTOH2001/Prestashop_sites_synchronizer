@@ -119,13 +119,16 @@ def add_images():
                         try:
                             image = prestashop._execute(image_url, 'GET').content
                         except AttributeError:
-                            logger.warning('Cache image expired, delete image from the cache')
+                            logger.warning('Cached image expired, deleting image from the cache')
                             del cached_images[id_to_ref[id]]
                         else:
                             new_images += 1
                             logger.debug('Added image {} for product {}'.format(image_url, id_to_ref[id]))
-                            prestashop.add('/images/products/{}'.format(id),
-                                           files=[('image', 'automatically_added_image.jpg', image)])
+                            try:
+                                prestashop.add('/images/products/{}'.format(id),
+                                               files=[('image', 'automatically_added_image.jpg', image)])
+                            except AttributeError:  # Don't know why, but sometimes presta is unable to download image
+                                continue
 
         total_images += new_images
         total_products += new_products
