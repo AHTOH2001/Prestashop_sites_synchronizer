@@ -137,8 +137,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-venv
+caches/*
 
-caches
-
-logs
+logs/*

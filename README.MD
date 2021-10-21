@@ -1,4 +1,4 @@
-# Script for synchronization images and descriptions in different prestashop sites
+# Script for synchronization images, statuses and descriptions in different prestashop sites by product reference
 
 cache format:
 

@@ -70,3 +70,4 @@ def sync_statuses():
         logger.info('Disabled {} statuses in {}s...\n'.format(disabled_counter, round(time.time() - start, 2)))        
 
     logger.info('Total disabled {} products in {}s...\n'.format(total_disabled, round(time.time() - total_start, 2)))
+    logger.info('*****End statuses synchronization!*****\n')
