@@ -25,10 +25,14 @@ def get_logger(name=__file__, file='log.txt', encoding='utf-8'):
 
 # Order has value
 friendly_sites = os.environ.get('FRIENDLY_SITES').split()
+main_site_for_statuses = os.environ.get('MAIN_SITE_FOR_STATUSES')
+dependent_sites_for_statuses = os.environ.get('DEPENDENT_SITES_FOR_STATUSES').split()
+
 
 product_limit = 99999
 cached_images_path = 'caches/cached_images.json'
 cached_descs_path = 'caches/cached_descs.json'
 images_logger = get_logger(name='images logger', file='logs/images_log.txt')
 descs_logger = get_logger(name='descs logger', file='logs/descs_log.txt')
+statuses_logger = get_logger(name='statuses logger', file='logs/statuses_log.txt')
 prestashop_token = os.environ.get('PRESTA_TOKEN')

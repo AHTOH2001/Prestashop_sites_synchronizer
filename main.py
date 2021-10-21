@@ -1,9 +1,11 @@
-import time
+from concurrent.futures.thread import ThreadPoolExecutor
 from images_importer import get_images, add_images
-from desc_importer import get_desc, add_desc
+from desc_importer import get_descs, add_descs
+from status_importer import sync_statuses
 
 if __name__ == '__main__':
-    # get_desc()
-    add_desc()
-    # get_images()
-    # add_images()
+    sync_statuses()
+    get_descs()
+    add_descs()
+    get_images()
+    add_images()
