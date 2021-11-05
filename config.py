@@ -30,9 +30,10 @@ dependent_sites_for_statuses = os.environ.get('DEPENDENT_SITES_FOR_STATUSES').sp
 
 
 product_limit = 99999
-cached_images_path = 'caches/cached_images.json'
-cached_descs_path = 'caches/cached_descs.json'
-images_logger = get_logger(name='images logger', file='logs/images_log.txt')
-descs_logger = get_logger(name='descs logger', file='logs/descs_log.txt')
-statuses_logger = get_logger(name='statuses logger', file='logs/statuses_log.txt')
+workdir = os.path.dirname(os.path.abspath(__file__))
+cached_images_path = os.path.join(workdir, 'caches/cached_images.json')
+cached_descs_path = os.path.join(workdir, 'caches/cached_descs.json')
+images_logger = get_logger(name='images logger', file=os.path.join(workdir, 'logs/images_log.txt'))
+descs_logger = get_logger(name='descs logger', file=os.path.join(workdir, 'logs/descs_log.txt'))
+statuses_logger = get_logger(name='statuses logger', file=os.path.join(workdir, 'logs/statuses_log.txt'))
 prestashop_token = os.environ.get('PRESTA_TOKEN')
