@@ -68,14 +68,23 @@ def get_descs():
 
 
 def task_adding_descriptions(product, prestashop, desc_languages, short_desc_languages):
-    full_product = prestashop.get('products', product['id'])
+    try:
+        full_product = prestashop.get('products', product['id'])
+    except Exception as exc:
+        logger.error(f'{exc} for id = {product["id"]}')
+        return
     full_product['product']['description']['language'] = desc_languages
     full_product['product']['description_short']['language'] = short_desc_languages
     logger.debug('Adding new descriptions for product {}'.format(product['reference']))
     # Pop these fields because they are not presented in the scheme, therefore edit will fail
-    full_product['product'].pop('manufacturer_name')
-    full_product['product'].pop('quantity')
-    prestashop.edit('products', full_product)
+    full_product['product'].pop('manufacturer_name', None)
+    full_product['product'].pop('quantity', None)
+    full_product['product'].pop('position_in_category', None)
+    try:
+        prestashop.edit('products', full_product)
+    except Exception as exc:
+        logger.error(f'{exc} for id = {product["id"]}')
+        return
 
 
 def add_descs():

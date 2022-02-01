@@ -120,7 +120,8 @@ def add_images():
                             image = prestashop._execute(image_url, 'GET').content
                         except AttributeError:
                             logger.warning('Cached image expired, deleting image from the cache')
-                            del cached_images[id_to_ref[id]]
+                            if id_to_ref[id] in cached_images:
+                                del cached_images[id_to_ref[id]]
                         else:
                             new_images += 1
                             logger.debug('Added image {} for product {}'.format(image_url, id_to_ref[id]))
