@@ -44,7 +44,6 @@ def get_images():
         for reference in ref_to_id:
             if reference in cached_images:
                 continue
-            logger.info(reference)
 
             try:
                 images = prestashop.get('images/products/{}'.format(ref_to_id[reference]))[0]
