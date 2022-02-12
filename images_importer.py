@@ -21,7 +21,7 @@ def get_images():
     for site in friendly_sites:
         logger.info('Start on site {}...'.format(site))
 
-        prestashop = PrestaShopWebService('http://{}/api'.format(site), prestashop_token, debug=True)
+        prestashop = PrestaShopWebService('{}/api'.format(site), prestashop_token)
 
         start = time.time()
         logger.info('Start ids getting...')
@@ -44,6 +44,7 @@ def get_images():
         for reference in ref_to_id:
             if reference in cached_images:
                 continue
+            logger.info(reference)
 
             try:
                 images = prestashop.get('images/products/{}'.format(ref_to_id[reference]))[0]
@@ -54,7 +55,7 @@ def get_images():
             images_urls = []
             for image in images:
                 new_images += 1
-                images_urls.append(image.get('{http://www.w3.org/1999/xlink}href'))
+                images_urls.append(image.get('{https://www.w3.org/1999/xlink}href'))
 
             if len(images_urls) != 0:
                 cached_images[reference] = images_urls
@@ -87,7 +88,7 @@ def add_images():
     for site in friendly_sites:
         logger.info('Start on site {}...'.format(site))
 
-        prestashop = PrestaShopWebService('http://{}/api'.format(site), prestashop_token, debug=True)
+        prestashop = PrestaShopWebService('{}/api'.format(site), prestashop_token)
 
         start = time.time()
         logger.info('Start references getting...')
@@ -118,7 +119,7 @@ def add_images():
                     for image_url in cached_images[id_to_ref[id]]:
                         try:
                             image = prestashop._execute(image_url, 'GET').content
-                        except AttributeError:
+                        except Exception:
                             logger.warning('Cached image expired, deleting image from the cache')
                             if id_to_ref[id] in cached_images:
                                 del cached_images[id_to_ref[id]]

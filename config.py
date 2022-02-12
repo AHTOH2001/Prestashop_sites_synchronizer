@@ -3,6 +3,7 @@ import sys
 from logging import FileHandler
 import logging
 import os
+from dotenv import load_dotenv
 
 
 def get_logger(name=__file__, file='log.txt', encoding='utf-8'):
@@ -23,6 +24,8 @@ def get_logger(name=__file__, file='log.txt', encoding='utf-8'):
     return log
 
 
+load_dotenv()
+
 # Order has value
 friendly_sites = os.environ.get('FRIENDLY_SITES').split()
 main_site_for_statuses = os.environ.get('MAIN_SITE_FOR_STATUSES')
@@ -37,3 +40,4 @@ images_logger = get_logger(name='images logger', file=os.path.join(workdir, 'log
 descs_logger = get_logger(name='descs logger', file=os.path.join(workdir, 'logs/descs_log.txt'))
 statuses_logger = get_logger(name='statuses logger', file=os.path.join(workdir, 'logs/statuses_log.txt'))
 prestashop_token = os.environ.get('PRESTA_TOKEN')
+root_logger = get_logger(name='root', file=os.path.join(workdir, 'logs/root_log.txt'))

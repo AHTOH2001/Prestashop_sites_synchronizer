@@ -18,7 +18,7 @@ def get_descs():
         logger.info('Start on site {}...'.format(site))
         start = time.time()
 
-        prestashop = PrestaShopWebServiceDict('http://{}/api'.format(site), prestashop_token)
+        prestashop = PrestaShopWebServiceDict('{}/api'.format(site), prestashop_token)
 
         try:
             products = prestashop.get(
@@ -102,7 +102,7 @@ def add_descs():
         logger.info('Start on site {}...'.format(site))
         start = time.time()
 
-        prestashop = PrestaShopWebServiceDict('http://{}/api'.format(site), prestashop_token)
+        prestashop = PrestaShopWebServiceDict('{}/api'.format(site), prestashop_token)
 
         try:
             products = prestashop.get(

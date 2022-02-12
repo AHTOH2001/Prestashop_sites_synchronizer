@@ -6,7 +6,7 @@ import concurrent.futures
 
 def get_disabled(site):
     start = time.time()
-    prestashop = PrestaShopWebServiceDict('http://{}/api'.format(site), prestashop_token)
+    prestashop = PrestaShopWebServiceDict('{}/api'.format(site), prestashop_token)
 
     logger.info('Start getting statuses from {}...'.format(site))
 
@@ -46,7 +46,7 @@ def sync_statuses():
         logger.info('Start on site {}...'.format(site))
         start = time.time()
 
-        prestashop = PrestaShopWebServiceDict('http://{}/api'.format(site), prestashop_token)
+        prestashop = PrestaShopWebServiceDict('{}/api'.format(site), prestashop_token)
 
         try:
             products = prestashop.get(
