@@ -128,7 +128,7 @@ def add_images():
                             try:
                                 prestashop.add('/images/products/{}'.format(id),
                                                files=[('image', 'automatically_added_image.jpg', image)])
-                            except AttributeError:  # Don't know why, but sometimes presta is unable to download image
+                            except Exception:  # Don't know why, but sometimes presta is unable to download image
                                 continue
 
         total_images += new_images
