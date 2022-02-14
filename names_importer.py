@@ -112,14 +112,13 @@ def add_names():
                 for lang in product['name']['language']:
                     cur_id = lang['attrs']['id']
                     cur_value = lang['value']
-                    if iso_codes[cur_id] in new_names and cur_value == '':
+                    if iso_codes[cur_id] in new_names and (cur_value == '' or site == 'http://nk7i.l.dedikuoti.lt'):
                         name_languages.append({'attrs': {'id': cur_id}, 'value': new_names[iso_codes[cur_id]]})
                     else:
                         name_languages.append(lang)
 
                 if product['name']['language'] != name_languages:
-                    task_adding_names(product, prestashop, name_languages)
-                    # pool.submit(task_adding_names, product, prestashop, name_languages)
+                    pool.submit(task_adding_names, product, prestashop, name_languages)
                     new_names_counter += 1
 
         total_names += new_names_counter
