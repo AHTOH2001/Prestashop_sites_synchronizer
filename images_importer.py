@@ -130,6 +130,8 @@ def add_images():
                                                files=[('image', 'automatically_added_image.jpg', image)])
                             except Exception:  # Don't know why, but sometimes presta is unable to download image
                                 continue
+            except Exception:  # Drop connection error
+                pass
 
         total_images += new_images
         total_products += new_products
