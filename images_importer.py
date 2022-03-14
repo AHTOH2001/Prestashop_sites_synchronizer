@@ -54,7 +54,12 @@ def get_images():
             images_urls = []
             for image in images:
                 new_images += 1
-                images_urls.append(image.get('{https://www.w3.org/1999/xlink}href'))
+                image_url = image.get('{https://www.w3.org/1999/xlink}href')
+                if not image_url:
+                    image_url = image.get('{http://www.w3.org/1999/xlink}href')
+                    images_urls.append(image_url.replace('https', 'http'))
+                else:
+                    images_urls.append(image_url)
 
             if len(images_urls) != 0:
                 cached_images[reference] = images_urls
