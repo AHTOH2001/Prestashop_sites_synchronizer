@@ -3,6 +3,9 @@ import sys
 from logging import FileHandler
 import logging
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
 
 
 def get_logger(name=__file__, file='log.txt', encoding='utf-8'):

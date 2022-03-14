@@ -6,11 +6,11 @@ from config import root_logger as logger
 
 if __name__ == '__main__':
     try:
-        get_names()
-        add_names()
         sync_statuses()
         get_images()
         add_images()
+        get_names()
+        add_names()
         get_descs()
         add_descs()
     except Exception as exc:
