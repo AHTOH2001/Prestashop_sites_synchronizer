@@ -123,20 +123,25 @@ def add_images():
                     for image_url in cached_images[id_to_ref[id]]:
                         try:
                             image = prestashop._execute(image_url, 'GET').content
-                        except Exception:
-                            logger.warning('Cached image expired, deleting image from the cache')
+                        except AttributeError:
+                            logger.warning('Cached image expired, deleting image from the cache for product {}'.format(id_to_ref[id]))
                             if id_to_ref[id] in cached_images:
                                 del cached_images[id_to_ref[id]]
+                        except Exception as exc:
+                            logger.exception('Cached image expired, deleting image from the cache for product {} (image_url={})'.format(id_to_ref[id], image_url))
+                            #if id_to_ref[id] in cached_images:
+                                #del cached_images[id_to_ref[id]]
                         else:
                             new_images += 1
                             logger.debug('Added image {} for product {}'.format(image_url, id_to_ref[id]))
                             try:
-                                prestashop.add('/images/products/{}'.format(id),
+                                prestashop.add('images/products/{}'.format(id),
                                                files=[('image', 'automatically_added_image.jpg', image)])
                             except Exception:  # Don't know why, but sometimes presta is unable to download image
+                                logger.exception('image add exc')
                                 continue
             except Exception:  # Drop connection error
-                pass
+                logger.exception('Get prod image exc')
 
         total_images += new_images
         total_products += new_products

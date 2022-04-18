@@ -14,4 +14,4 @@ if __name__ == '__main__':
         get_descs()
         add_descs()
     except Exception as exc:
-        logger.error(str(exc))
+        logger.exception('main exc')
